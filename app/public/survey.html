@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survey</title>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Questions</h3>
+      <br />
+      <form>
+        <div class="input-field">
+          <input id="name" type="text" class="validate" />
+          <label for="name">Your Name</label>
+        </div>
+        <div class="input-field">
+          <input id="picture" type="text" class="validate" />
+          <label for="picture">Link to an image of you</label>
+        </div>
+      </form>
+    </div>
+
+    <script type="text/javascript">
+      $.ajax({ url: "/api/surveyquestions", method: "GET" }).then(function(
+        survey
+      ) {
+        console.log(survey);
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>

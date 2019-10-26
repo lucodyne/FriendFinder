@@ -20,15 +20,20 @@
     <div class="container">
       <h3>Questions</h3>
       <br />
-      <form action="/" method="POST">
+      <form action="/api/friends" method="POST">
         <div class="input-field">
-          <input id="name" type="text" class="validate" />
+          <input id="name" type="text" required />
           <label for="name">Your Name</label>
         </div>
         <div class="input-field">
-          <input id="picture" type="text" class="validate" />
+          <input id="picture" type="text" required />
           <label for="picture">Link to an image of you</label>
         </div>
+        <h6>
+          Answer the questions on a scale of 1-5 (1 = strongly disagree, 5 =
+          strongly agree)
+        </h6>
+        <br />
       </form>
     </div>
 
@@ -45,39 +50,36 @@
           question.append(`${survey[questionNumber]}`);
           question.append(`
           <br>
-            <label>
-              <input name="question${questionNumber}" type="radio" />
-              <span>1</span>
-            </label>
-            <label>
-              <input name="question${questionNumber}" type="radio" />
-              <span>2</span>
-            </label>
-            <label>
-              <input name="question${questionNumber}" type="radio" />
-              <span>3</span>
-            </label>
-            <label>
-              <input name="question${questionNumber}" type="radio" />
-              <span>4</span>
-            </label>
-            <label>
-              <input name="question${questionNumber}" type="radio" />
-              <span>5</span>
-            </label>
-            <br><br>
-            `);
+          <label>
+            <input required name="question${questionNumber}" value="1" type="radio" />
+            <span>1</span>
+          </label>
+          <label>
+            <input name="question${questionNumber}" value="2" type="radio" />
+            <span>2</span>
+          </label>
+          <label>
+            <input name="question${questionNumber}" value="3" type="radio" />
+            <span>3</span>
+          </label>
+          <label>
+            <input name="question${questionNumber}" value="4" type="radio" />
+            <span>4</span>
+          </label>
+          <label>
+            <input name="question${questionNumber}" value="5" type="radio" />
+            <span>5</span>
+          </label>
+          <br><br>`);
           $("form").append(question);
         }
+
         $("form").append(
           "<button class='btn waves-effect waves-light' type='submit' id='submitBtn' name='action'>Submit <i class='material-icons right'>send</i> </button>"
         );
       });
-
-      $(document).on("click", "#submitBtn", function() {
-        event.preventDefault();
-      });
     </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>
 </html>

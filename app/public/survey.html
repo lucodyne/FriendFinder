@@ -36,7 +36,46 @@
       $.ajax({ url: "/api/surveyquestions", method: "GET" }).then(function(
         survey
       ) {
-        console.log(survey);
+        for (
+          questionNumber = 0;
+          questionNumber < survey.length;
+          questionNumber++
+        ) {
+          const question = $("<div>");
+          question.append(`${survey[questionNumber]}`);
+          question.append(`
+          <br>
+            <label>
+              <input name="question${questionNumber}" type="radio" />
+              <span>1</span>
+            </label>
+            <label>
+              <input name="question${questionNumber}" type="radio" />
+              <span>2</span>
+            </label>
+            <label>
+              <input name="question${questionNumber}" type="radio" />
+              <span>3</span>
+            </label>
+            <label>
+              <input name="question${questionNumber}" type="radio" />
+              <span>4</span>
+            </label>
+            <label>
+              <input name="question${questionNumber}" type="radio" />
+              <span>5</span>
+            </label>
+            <br><br>
+            `);
+          $("form").append(question);
+        }
+        $("form").append(
+          "<button class='btn waves-effect waves-light' type='submit' id='submitBtn' name='action'>Submit <i class='material-icons right'>send</i> </button>"
+        );
+      });
+
+      $(document).on("click", "#submitBtn", function() {
+        event.preventDefault();
       });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

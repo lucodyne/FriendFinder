@@ -1,3 +1,5 @@
+// referenced similarminds.com for questions
+
 const friendsSurvey = [
   "I am comfortable in large groups.",
 

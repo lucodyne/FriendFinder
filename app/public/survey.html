@@ -18,15 +18,15 @@
   </head>
   <body>
     <div class="container">
-      <h3>Questions</h3>
+      <h3>Friend Finder Survey</h3>
       <br />
       <form action="/api/friends" method="POST">
         <div class="input-field">
-          <input id="name" type="text" required />
+          <input id="name" type="text" required name="name" />
           <label for="name">Your Name</label>
         </div>
         <div class="input-field">
-          <input id="picture" type="text" required />
+          <input id="picture" type="text" required name="picture" />
           <label for="picture">Link to an image of you</label>
         </div>
         <h6>
@@ -38,6 +38,12 @@
     </div>
 
     <script type="text/javascript">
+      let friends = [];
+      $.ajax({ url: "/api/friends", method: "GET" }).then(function(
+        friendsData
+      ) {
+        friends = friendsData;
+      });
       $.ajax({ url: "/api/surveyquestions", method: "GET" }).then(function(
         survey
       ) {
@@ -77,6 +83,75 @@
         $("form").append(
           "<button class='btn waves-effect waves-light' type='submit' id='submitBtn' name='action'>Submit <i class='material-icons right'>send</i> </button>"
         );
+      });
+
+      $(document).on("submit", "form", function() {
+        event.preventDefault();
+        const newFriend = {
+          name: $("input[name=name]")
+            .val()
+            .trim(),
+          picture: $("input[name=picture]")
+            .val()
+            .trim(),
+          question0: $("input[name=question0]:checked")
+            .val()
+            .trim(),
+          question1: $("input[name=question1]:checked")
+            .val()
+            .trim(),
+          question2: $("input[name=question2]:checked")
+            .val()
+            .trim(),
+          question3: $("input[name=question3]:checked")
+            .val()
+            .trim(),
+          question4: $("input[name=question4]:checked")
+            .val()
+            .trim(),
+          question5: $("input[name=question5]:checked")
+            .val()
+            .trim(),
+          question6: $("input[name=question6]:checked")
+            .val()
+            .trim(),
+          question7: $("input[name=question7]:checked")
+            .val()
+            .trim(),
+          question8: $("input[name=question8]:checked")
+            .val()
+            .trim(),
+          question9: $("input[name=question9]:checked")
+            .val()
+            .trim()
+        };
+        $.post("/api/friends", newFriend, function(send) {
+          $("button").addClass("disabled");
+          if (friends.length === 0) {
+            alert("Looks like you're the first entry! Added to the database!");
+          } else {
+            let bestmatch = { difference: 99 };
+            friends.forEach(friend => {
+              friend.difference = 0;
+              // calculates friend.difference for each person in db
+              for (q = 0; q < 10; q++) {
+                friend.difference += Math.abs(
+                  friend[`question${q}`] - newFriend[`question${q}`]
+                );
+              }
+
+              // sets lowest difference to best match
+              friends.forEach(friendly => {
+                if (bestmatch.difference > friendly.difference) {
+                  bestmatch = friendly;
+                }
+              });
+            });
+            alert(
+              `Based on your answers, you'd get along well with ${bestmatch.name}!`
+            );
+          }
+        });
       });
     </script>
 

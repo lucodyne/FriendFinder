@@ -17,3 +17,7 @@ Logic is pretty straightforward. The first entry doesn't get a match, but every 
 ## Requirements
 
 - None! :D
+
+## Known Issues
+
+Struggling with getting the result to show as a modal. Coming soon!
